@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
-    let dict: [String : Double] = ["Soft" : 300.0,
+    let dict: [String : Double] = ["Soft" : 3.0,
                                 "Medium" : 480.0,
                                 "Hard" : 720.0]
+    var player: AVAudioPlayer!
+
     var totalTime = 0.0
     var secondsPassed = 0.0
     
@@ -44,6 +47,9 @@ class ViewController: UIViewController {
         } else {
             titleChange.text = "DONE!"
             progressView.progress = 1
+            let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")
+            player = try! AVAudioPlayer(contentsOf: url!)
+            player.play()
         }
     }
 }
