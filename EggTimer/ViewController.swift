@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     
     @IBAction func hardnessSelected(_ sender: UIButton) {
+        progressView.progress = 0.0
         
         timer.invalidate()
         
@@ -34,8 +35,8 @@ class ViewController: UIViewController {
     
     @objc func updateTimer() {
         if(secondsPassed < totalTime) {
-            progressView.progress = Float(secondsPassed / totalTime)
             secondsPassed += 1
+            progressView.progress = Float(secondsPassed / totalTime)
         } else {
             titleChange.text = "DONE!"
             progressView.progress = 1
