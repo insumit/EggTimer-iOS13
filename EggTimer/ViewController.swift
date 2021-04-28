@@ -21,13 +21,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     
     @IBAction func hardnessSelected(_ sender: UIButton) {
-        progressView.progress = 0.0
         
         timer.invalidate()
         
         let hardness = sender.currentTitle!
         
         totalTime = dict[hardness]!
+        
+        progressView.progress = 0.0
+
+        secondsPassed = 0.0
+        titleChange.text = hardness
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         
