@@ -9,7 +9,36 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let dict: [String : Double] = ["Soft" : 300.0,
+                                "Medium" : 480.0,
+                                "Hard" : 720.0]
+    var totalTime = 0.0
+    var secondsPassed = 0.0
     
-
-
+    var timer = Timer()
+    
+    @IBOutlet weak var titleChange: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
+    
+    @IBAction func hardnessSelected(_ sender: UIButton) {
+        
+        timer.invalidate()
+        
+        let hardness = sender.currentTitle!
+        
+        totalTime = dict[hardness]!
+        
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func updateTimer() {
+        if(secondsPassed < totalTime) {
+            progressView.progress = Float(secondsPassed / totalTime)
+            secondsPassed += 1
+        } else {
+            titleChange.text = "DONE!"
+            progressView.progress = 1
+        }
+    }
 }
